@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroView</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        * {
+            background-color: #0d1b2a;
+        }
+
+        h1, p {
+            text-align: center;
+            color: #e0e1dd;
+            font-family: "Space Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+    <h1 id="counter">Astronauts in space right now:</h1>
+    <div class="astro-list">
+        
+    </div>
+    <script>
+        var h1 = document.getElementById("counter")
+        $.getJSON('http://api.open-notify.org/astros.json', function(data) {
+            console.log(data['number'])
+            h1.innerHTML = "Astronauts in space right now: " + data['number']
+            for (let i = 0; i <= data['number']; i++) {
+                const newParagraph = document.createElement("p");
+                newParagraph.innerText = data['people'][i]['name']
+                document.body.appendChild(newParagraph);
+            }
+        });
+    </script>
+</body>
+</html>
